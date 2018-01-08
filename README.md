@@ -155,6 +155,18 @@ allowedAttributes: {
 }
 ```
 
+### Comments
+
+You can set the `allowComments` option to `true` to preserve comments:
+
+```javascript
+clean = sanitizeHTML('<!-- this is a comment -->', {
+  allowComments: true
+});
+```
+
+This option is set to `false` by default (comments will be removed).
+
 ### htmlparser2 Options
 
 `santizeHtml` is built on `htmlparser2`. By default the only option passed down is `decodeEntities: true` You can set the options to pass by using the parser option.

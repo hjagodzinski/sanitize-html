@@ -647,4 +647,19 @@ describe('sanitizeHtml', function() {
       }), '<span style="color:yellow;text-align:center;font-family:helvetica;"></span>'
     );
   });
+  it('should preserve comments if allowComments is true', function() {
+    assert.equal(
+      sanitizeHtml('<!-- This is a <script>comment</script> -->', {
+        allowComments: true
+      }),
+      '<!-- This is a <script>comment</script> -->'
+    );
+  });
+  it('should remove comments if allowComments is false (default)', function() {
+    assert.equal(
+      sanitizeHtml('<!-- This is a <script>comment</script> -->', {
+      }),
+      ''
+    );
+  });
 });

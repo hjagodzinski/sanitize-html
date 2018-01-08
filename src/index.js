@@ -307,8 +307,15 @@ function sanitizeHtml(html, options, _recursing) {
            frame.text += text;
       }
     },
-    onclosetag: function(name) {
+    oncomment: function(text) {
+      if (!options.allowComments) {
+        return;
+      }
 
+      text = '<!--' + text + '-->';
+      result += text;
+    },
+    onclosetag: function(name) {
       if (skipText) {
         skipTextDepth--;
         if (!skipTextDepth) {
@@ -511,7 +518,8 @@ sanitizeHtml.defaults = {
   // URL schemes we permit
   allowedSchemes: [ 'http', 'https', 'ftp', 'mailto' ],
   allowedSchemesByTag: {},
-  allowProtocolRelative: true
+  allowProtocolRelative: true,
+  allowComments: false
 };
 
 sanitizeHtml.simpleTransform = function(newTagName, newAttribs, merge) {
